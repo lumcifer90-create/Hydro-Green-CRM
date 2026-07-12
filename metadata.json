@@ -1,0 +1,6 @@
+{
+  "name": "Hydrogreen CRM",
+  "description": "Internal business management and customer relationship management system for Hydrogreen Energy Pvt. Ltd.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,240 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Authorized user of the Hydrogreen CRM",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "viewer"] },
+        "active": { "type": "boolean" },
+        "name": { "type": "string" }
+      },
+      "required": ["uid", "email", "role", "active"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Customer personal details, project overview, and metadata of physical files/documents",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "village": { "type": "string" },
+        "district": { "type": "string" },
+        "state": { "type": "string" },
+        "pinCode": { "type": "string" },
+        "projectType": { "type": "string" },
+        "area": { "type": "string" },
+        "crop": { "type": "string" },
+        "status": { "type": "string" },
+        "projectValue": { "type": "number" },
+        "notes": { "type": "string" },
+        "documents": {
+          "type": "array"
+        }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Prospective clients and lead stage details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "email": { "type": "string" },
+        "source": { "type": "string" },
+        "date": { "type": "string" },
+        "meetingDate": { "type": "string" },
+        "meetingNotes": { "type": "string" },
+        "product": { "type": "string" },
+        "budget": { "type": "number" },
+        "expectedClosingDate": { "type": "string" },
+        "followUpDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["New", "Interested", "Follow-up", "Won", "Lost"] },
+        "rejectionReason": { "type": "string" }
+      },
+      "required": ["id", "name", "phone", "status"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Project execution status, historical records, and stages tracker",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "projectName": { "type": "string" },
+        "currentStage": { "type": "string" },
+        "stages": { "type": "object" },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" },
+        "totalValue": { "type": "number" },
+        "areaCovered": { "type": "number" }
+      },
+      "required": ["id", "customerId", "customerName", "projectName", "currentStage"]
+    },
+    "WorkLog": {
+      "title": "WorkLog",
+      "description": "Daily progress logs for active projects",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "date": { "type": "string" },
+        "workCompleted": { "type": "string" },
+        "pendingWork": { "type": "string" },
+        "materialUsed": { "type": "array" },
+        "expectedCompletionDate": { "type": "string" },
+        "remarks": { "type": "string" }
+      },
+      "required": ["id", "projectId", "date", "workCompleted"]
+    },
+    "InventoryItem": {
+      "title": "InventoryItem",
+      "description": "Raw material catalog, stock levels, suppliers, and consumption metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productName": { "type": "string" },
+        "category": { "type": "string" },
+        "supplier": { "type": "string" },
+        "unit": { "type": "string" },
+        "purchasePrice": { "type": "number" },
+        "sellingPrice": { "type": "number" },
+        "availableQty": { "type": "number" },
+        "minStockLevel": { "type": "number" },
+        "purchaseHistory": { "type": "array" },
+        "consumption": { "type": "array" }
+      },
+      "required": ["id", "productName", "availableQty", "minStockLevel"]
+    },
+    "FinanceRecord": {
+      "title": "FinanceRecord",
+      "description": "Quotations, Estimates, Invoices, Expenses, or Payments logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string", "enum": ["Quotation", "Estimate", "Invoice", "Expense", "PaymentReceived"] },
+        "number": { "type": "string" },
+        "customerId": { "type": "string" },
+        "projectId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "date": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string" },
+        "items": { "type": "array" },
+        "remarks": { "type": "string" }
+      },
+      "required": ["id", "type", "number", "date", "amount"]
+    },
+    "SupportTicket": {
+      "title": "SupportTicket",
+      "description": "After-sales complaint logging, visits, and warrant/AMC status tracker",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "complaintNumber": { "type": "string" },
+        "complaint": { "type": "string" },
+        "status": { "type": "string", "enum": ["Registered", "In Progress", "Resolved"] },
+        "visitDate": { "type": "string" },
+        "resolutionNotes": { "type": "string" },
+        "history": { "type": "array" },
+        "warrantyStatus": { "type": "string" },
+        "amcDetails": { "type": "string" },
+        "feedback": { "type": "string" }
+      },
+      "required": ["id", "customerId", "customerName", "complaintNumber", "complaint", "status"]
+    },
+    "AgronomyVisit": {
+      "title": "AgronomyVisit",
+      "description": "Agronomist visits, observations, and recommendations tracker",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "visitDate": { "type": "string" },
+        "cropName": { "type": "string" },
+        "observation": { "type": "string" },
+        "diseaseDetails": { "type": "string" },
+        "recommendations": { "type": "string" },
+        "nextVisitDate": { "type": "string" },
+        "remarks": { "type": "string" }
+      },
+      "required": ["id", "customerId", "customerName", "visitDate", "cropName"]
+    },
+    "CompanySettings": {
+      "title": "CompanySettings",
+      "description": "Company operational configuration and banking parameters",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "gstNumber": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "website": { "type": "string" },
+        "bankName": { "type": "string" },
+        "bankAccountNo": { "type": "string" },
+        "bankIfsc": { "type": "string" },
+        "bankBranch": { "type": "string" },
+        "defaultPdfFooter": { "type": "string" },
+        "themeColor": { "type": "string" }
+      },
+      "required": ["companyName"]
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "User",
+      "description": "Collection of authorized users of the system"
+    },
+    "customers": {
+      "schema": "Customer",
+      "description": "Collection of business customers"
+    },
+    "leads": {
+      "schema": "Lead",
+      "description": "Collection of inquiries and sales leads"
+    },
+    "projects": {
+      "schema": "Project",
+      "description": "Collection of running/pending/completed business projects"
+    },
+    "worklogs": {
+      "schema": "WorkLog",
+      "description": "Collection of project work logs"
+    },
+    "inventory": {
+      "schema": "InventoryItem",
+      "description": "Collection of raw material stock details"
+    },
+    "finance": {
+      "schema": "FinanceRecord",
+      "description": "Collection of quotations, estimates, invoices, ledger, payments, expenses"
+    },
+    "support": {
+      "schema": "SupportTicket",
+      "description": "Collection of after-sales complaints and visits logs"
+    },
+    "agronomy": {
+      "schema": "AgronomyVisit",
+      "description": "Collection of agronomy site audits and recommendations"
+    },
+    "settings": {
+      "schema": "CompanySettings",
+      "description": "Collection of enterprise parameters and settings documents"
+    }
+  }
+}
